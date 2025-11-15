@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Final Orders</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="~{fragments/nav :: body}"></div>
+<div class="container">
+  <div class="toolbar">
+    <h2>Final Orders</h2>
+    <form method="get" th:action="@{/orders/final}" style="display:flex; gap:8px; align-items:center;">
+      <label for="date">Date</label>
+      <input id="date" type="date" name="date" th:value="${date}" />
+      <button type="submit" class="btn">Apply</button>
+      <button type="button" class="btn secondary" onclick="window.print()">Print</button>
+    </form>
+  </div>
+
+  <h3>Consolidated Summary (Date: <span th:text="${date}"></span>)</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Vegetable</th>
+      <th>Total Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(summary)}">
+      <td colspan="3">No orders found for the selected date.</td>
+    </tr>
+    <tr th:each="s, iter : ${summary}">
+      <td th:text="${iter.count}">1</td>
+      <td th:text="${s.vegetableName}">Tomato</td>
+      <td th:text="${s.totalQuantity}">10</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:24px;">Orders List</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Order ID</th>
+      <th>Customer</th>
+      <th>Items</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(orders)}">
+      <td colspan="4">No orders.</td>
+    </tr>
+    <tr th:each="o, iter : ${orders}">
+      <td th:text="${iter.count}">1</td>
+      <td><a th:href="@{|/orders/${o.id}|}" th:text="${o.id}">1</a></td>
+      <td th:text="${o.customer.firstName + ' ' + o.customer.lastName}">John Doe</td>
+      <td>
+        <ul style="margin:0; padding-left:18px;">
+          <li th:each="it : ${o.items}" th:text="${it.vegetable.name + ' x ' + it.quantity}">Tomato x 1</li>
+        </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

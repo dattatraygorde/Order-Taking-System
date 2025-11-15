@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Server error</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="~{fragments/nav :: body}"></div>
+<div class="container">
+  <h2>500 - Something went wrong</h2>
+  <p>Sorry, an unexpected error occurred. Please try again later.</p>
+  <a class="btn" href="/" >Go Home</a>
+</div>
+</body>
+</html>

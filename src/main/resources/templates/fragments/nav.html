@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav style="display:flex; gap:16px; align-items:center; padding:10px; background:#f5f5f5; border-bottom:1px solid #ddd;">
+  <a th:href="@{/customers}" th:classappend="${tab}=='customers' ? 'active' : ''">Customers</a>
+  <a th:href="@{/vegetables}" th:classappend="${tab}=='vegetables' ? 'active' : ''">Vegetables</a>
+  <a th:href="@{/orders/new}" th:classappend="${tab}=='ordertaking' ? 'active' : ''">Order Taking</a>
+  <a th:href="@{/orders/final}" th:classappend="${tab}=='finalorders' ? 'active' : ''">Final Orders</a>
+  <div style="margin-left:auto;">
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+</nav>
+</body>
+</html>

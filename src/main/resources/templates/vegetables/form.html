@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${vegetable.id} != null ? 'Edit Vegetable' : 'Add Vegetable'">Vegetable</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<div th:replace="~{fragments/nav :: body}"></div>
+<div class="container">
+  <h2 th:text="${vegetable.id} != null ? 'Edit Vegetable' : 'Add Vegetable'">Vegetable</h2>
+  <form th:action="${vegetable.id} != null ? @{|/vegetables/${vegetable.id}/edit|} : @{/vegetables}" th:object="${vegetable}" method="post">
+    <div class="form-group">
+      <label>Name</label>
+      <input th:field="*{name}" type="text" required />
+      <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    </div>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <div class="toolbar">
+      <button type="submit" class="btn">Save</button>
+      <a th:href="@{/vegetables}" class="btn secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

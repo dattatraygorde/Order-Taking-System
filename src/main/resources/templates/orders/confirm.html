@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Confirmation</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  <style>
+    @media print {
+      nav, .toolbar, .print-btn { display: none !important; }
+      .container { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: body}"></div>
+<div class="container">
+  <div class="toolbar">
+    <h2>Order Confirmation</h2>
+    <button class="btn print-btn" onclick="window.print()">Print</button>
+  </div>
+  <div>
+    <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>
+    <p><strong>Date:</strong> <span th:text="${order.orderDate}"></span></p>
+    <p><strong>Customer:</strong> <span th:text="${order.customer.firstName + ' ' + order.customer.lastName}"></span> (<span th:text="${order.customer.email}"></span>)</p>
+    <p><strong>Address:</strong> <span th:text="${order.customer.address}"></span></p>
+  </div>
+  <h3>Items</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Vegetable</th>
+      <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item, iter : ${order.items}">
+      <td th:text="${iter.count}">1</td>
+      <td th:text="${item.vegetable.name}">Tomato</td>
+      <td th:text="${item.quantity}">1</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="toolbar">
+    <a class="btn secondary" th:href="@{/orders/new}">New Order</a>
+    <a class="btn" th:href="@{/orders/final(date=${order.orderDate})}">View Final Orders (Same Date)</a>
+  </div>
+</div>
+</body>
+</html>
