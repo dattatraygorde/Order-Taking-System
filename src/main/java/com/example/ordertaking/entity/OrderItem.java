@@ -1,7 +1,7 @@
 package com.example.ordertaking.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "order_items")

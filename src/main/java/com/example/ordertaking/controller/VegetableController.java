@@ -2,7 +2,7 @@ package com.example.ordertaking.controller;
 
 import com.example.ordertaking.entity.Vegetable;
 import com.example.ordertaking.repository.VegetableRepository;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
